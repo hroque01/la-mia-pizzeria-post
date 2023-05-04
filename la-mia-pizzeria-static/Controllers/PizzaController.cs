@@ -4,7 +4,7 @@ namespace la_mia_pizzeria_static.Controllers
 {
     public class PizzaController : Controller
     {
-        List<Pizza> pizze = new List<Pizza>
+        public static List<Pizza> pizze = new List<Pizza>
             {
                 new Pizza(1, "Pizza Margherita", "Bella buona", "https://www.nicesurgelati.it/wp-content/uploads/2018/05/pizza_margherita_nice.jpg", 6),
                 new Pizza(2, "Pizza Diavola", "Bella piccante bellabuona", "https://www.kennedyfood.it/wp-content/uploads/2019/03/diavola.jpg", 8),
@@ -27,6 +27,26 @@ namespace la_mia_pizzeria_static.Controllers
             
             return View(pizza);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View("Create");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Pizza data)
+        {
+            if (!ModelState.IsValid)
+                return View("Create", data);
+
+            pizze.Add(data);
+
+            return RedirectToAction("Index");
+        }
+
+       
 
     }
 }
