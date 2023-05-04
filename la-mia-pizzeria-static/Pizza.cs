@@ -5,6 +5,7 @@ namespace la_mia_pizzeria_static
     public class Pizza
     {
         [Required(ErrorMessage = "Il campo è obbligatorio")]
+        [Range(1, int.MaxValue, ErrorMessage = "Il valore deve essere maggiore di zero")]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Il campo è obbligatorio")]
